@@ -1,48 +1,42 @@
-//Day1
+const eventList = document.getElementById("eventList");
 
-//let obj= {
-//    name: "Yokshit",
-//    age: 20,
-//    city: "Chennai",
-//}
-//console.log(obj);   
+function addEvent() {
+  const title = document.getElementById("title").value;
+  const date = document.getElementById("date").value;
+  const category = document.getElementById("category").value;
+  const desc = document.getElementById("description").value;
 
-// const para = document.querySelector(".para")
-// para.innerText = "fewhfvigfvLWbhbwgyibxjVBUIRGRUGUBUfe"
-// para.style.color = "blue"
-// console.log(para)
+  if (!title || !date) {
+    alert("Please enter title and date");
+    return;
+  }
 
-// const para1 = document.getElementById("pa")
-// para1.style.color = "red"
-// para1.innerText = "New Text"
-// console.log(para1)
+  createEvent(title, date, category, desc);
 
-//Day2
-
-// const para2 = document.getElementsByClassName("para")
-// para2[0].innerText = "First paragraph"
-// para2[1].innerText = "Second paragraph"
-// para2[0].style.color = "green"
-// para2[1].style.color = "purple"
-// console.log(para2)
-
-// let arr = [12,32,43,54,65]
-// arr.forEach((ele)=>console.log(ele)) // do not creates a new array
-// const newArr = arr.map((ele)=> ele/2) // creates a new array
-// console.log(newArr)
-
-// const container = document.querySelector(".container")
-// container.innerHTML = "<h1>This is a heading</h1><p>This is a paragraph</p>"
-// console.log(container)
-
-//Day3
-
-const btn = document.querySelector("button")
-btn.classList.add("btn")
-btn.addEventListener("click", function(){alert("submited!!!")})
-btn.addEventListener("mouseover",function(){console.log("tap to submit")})
-function rem()
-{
-    alert()
+  document.getElementById("title").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("description").value = "";
 }
-btn.removeEventListener()
+
+function createEvent(title, date, category, desc) {
+  const div = document.createElement("div");
+  div.className = "event";
+
+  div.innerHTML = `
+    <button class="delete" onclick="this.parentElement.remove()">×</button>
+    <h3>${title}</h3>
+    <p>📅 ${date}</p>
+    <span class="badge">${category}</span>
+    <p>${desc || "lorem ipsum"}</p>
+  `;
+
+  eventList.appendChild(div);
+}
+
+function clearEvents() {
+  eventList.innerHTML = "";
+}
+
+function addSample() {
+  createEvent("Emifest", "2026-01-14", "Social", "lorem ipsum");
+}
